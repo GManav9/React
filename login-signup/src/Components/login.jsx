@@ -23,9 +23,7 @@ function Login_signup() {
               placeholder="Enter your password"
               required
             />
-            <button className="bt mt-3 form-control">
-              Log-In
-            </button>
+            <button className="bt mt-3 form-control">Log-In</button>
             <p
               className="mt-3"
               onClick={() => {
@@ -60,8 +58,8 @@ function Login_signup() {
               id="password"
               placeholder="Enter your password"
               required
-              />
-              <button className="bt mt-3 form-control">SignUp</button>
+            />
+            <button className="bt mt-3 form-control">SignUp</button>
             <p
               className="mt-3"
               onClick={() => {
