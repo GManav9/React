@@ -20,15 +20,23 @@ function Counter() {
   };
 
   return (
-    <div>
-      <button onClick={HandleIncrement}>+</button>
-      <h1>{state}</h1>
+    <>
+      <div className="row d-flex justify-content-evenly align-items-center">
+        <div className="col-xl-2 d-flex justify-content-evenly align-items-center">
+          <button className="btn btn-primary" onClick={HandleIncrement}>
+            +
+          </button>
+          <h1>{state}</h1>
 
-      <Counter2 state2={state}></Counter2>
-      <Counter3 state3={state}></Counter3>
+          <Counter2 state2={state}></Counter2>
+          <Counter3 state3={state}></Counter3>
 
-      <button onClick={HandleDecrement}>-</button>
-    </div>
+          <button className="btn btn-primary" onClick={HandleDecrement}>
+            -
+          </button>
+        </div>
+      </div>
+    </>
   );
 }
 export default Counter;
