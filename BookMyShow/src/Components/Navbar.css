@@ -1,0 +1,18 @@
+.navbar {
+  width: 65%;
+}
+.logo {
+  width: 9%;
+  /* border: 1px solid black; */
+}
+.search {
+  width: 44%;
+}
+.search input {
+  border-left: 0px;
+}
+#basic-addon1 {
+  background-color: transparent;
+  border-right: 0px;
+}
+/* $carousel-transition-duration:       .6s; */
