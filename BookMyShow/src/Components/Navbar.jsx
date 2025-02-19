@@ -1,74 +1,66 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
 
-function Navbar() {
+function Navbar({ setSearchTerm }) {
+  const [term, setTerm] = useState("");
+  const [record, setRecord] = useState([]);
+
+  const searchedData =
+    term.trim() === ""
+      ? [] // Don't show anything if search is empty
+      : record.filter(
+          (item) => item.moviename.toLowerCase().includes(term.toLowerCase())
+          // item.type.toLowerCase().includes(term.toLowerCase()) // Filtering by 'moviename' and 'type'
+        );
+
+  useEffect(() => {
+    setSearchTerm(term);
+  }, [term, setSearchTerm]);
+
+  useEffect(() => {
+    let data = JSON.parse(localStorage.getItem("Student")) || [];
+    setRecord(data);
+  }, []);
+
   return (
     <>
       <header className="d-flex justify-content-center align-items-center">
-        <div className="navbar border border-1 border-danger d-flex justify-content-start align-items-center">
+        <div className="navbar d-flex justify-content-between align-items-center">
           <div className="logo">
             <img src={"BMS_logo_new.png"} className="img-fluid" alt="" />
           </div>
-          <div className="search ms-4">
-            <div class="input-group">
-              <span class="input-group-text" id="basic-addon1">
-                <i class="fa-solid fa-magnifying-glass"></i>
+          <div className="search ms-4 ">
+            <div className="input-group">
+              <span className="input-group-text" id="basic-addon1">
+                <i className="fa-solid fa-magnifying-glass"></i>
               </span>
               <input
                 type="text"
-                class="form-control"
+                className="form-control"
                 placeholder="search for Movies,Events,Plays,Sports, and Activities"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
+                value={term}
+                onChange={(e) => setTerm(e.target.value)}
               />
+
+              {searchedData.map((e, i) => {
+                return <div id="key"></div>;
+              })}
             </div>
           </div>
-        <Link to={"/Form"}>Add New Movie</Link>
+          <div className="bar">
+            <Link className="btn btn-danger ms-2 me-5" to={"/Form"}>
+              Add New Movie
+            </Link>
+            <button className="btn btn-danger ms-2 me-5">Sign In</button>
+            <button className="btn fs-5">
+              <i className="fa-solid fa-bars"></i>
+            </button>
+          </div>
         </div>
       </header>
-      <div className="FirstSection">
-        <div
-          id="carouselExampleControls"
-          class="carousel slide"
-          data-bs-ride="carousel"
-        >
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img
-                src={"1726036566435_playcardnewweb.jpg"}
-                class="d-block w-100"
-                alt="..."
-              />
-            </div>
-            <div class="carousel-item">
-              <img
-                src={"1738746077329_endvsindodi3desktopcarousel.jpg"}
-                class="d-block w-100"
-                alt="..."
-              />
-            </div>
-          </div>
-          <button
-            class="carousel-control-prev"
-            type="button"
-            data-bs-target="#carouselExampleControls"
-            data-bs-slide="prev"
-          >
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button
-            class="carousel-control-next"
-            type="button"
-            data-bs-target="#carouselExampleControls"
-            data-bs-slide="next"
-          >
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
-        </div>
-      </div>
     </>
   );
 }
