@@ -31,13 +31,8 @@ function Home() {
   };
 
   const handleEdit = (Id) => {
-    let singleData = record.find((movie) => movie.id == userId);
-    setName(singleData.image);
-    setSub(singleData.moviename);
-    setCity(singleData.description);
-    setEditIndex(Id);
-
-    navigate("/Form");
+    let singleData = movies.find((movie) => movie.id == Id);
+    navigate("/editForm", { state: singleData });
   };
 
   const filtereddata =
@@ -167,7 +162,7 @@ function Home() {
                       Delete
                     </button>
                     <button
-                      onClick={() => handleEdit()}
+                      onClick={() => handleEdit(movie.id)}
                       className="btn btn-danger ms-2"
                     >
                       Edit
