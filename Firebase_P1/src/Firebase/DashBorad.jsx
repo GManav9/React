@@ -29,9 +29,25 @@ export default function DashBorad() {
   };
 
   return (
-    <div>
-      DashBorad
-      <h1>Welcome {record.name}</h1>
+    // <div>
+    //   DashBorad
+    //   <h1>Welcome {record.name}</h1>
+    // </div>
+
+    <div
+      className="d-flex flex-column justify-content-center align-items-center"
+      style={{ height: "100vh" }}
+      >
+      <h3>Users</h3>
+      <div
+        className="card shadow-sm p-3 mb-3 bg-white rounded"
+        style={{ width: "18rem" }}
+      >
+        <div className="card-body text-center">
+          <h5 className="card-title fw-bold">{record.name}</h5>
+          <p className="card-text text-muted">{record.email}</p>
+        </div>
+      </div>
     </div>
   );
 }
