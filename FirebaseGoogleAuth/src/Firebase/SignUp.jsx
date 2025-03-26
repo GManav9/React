@@ -69,7 +69,11 @@ export default function SignUp() {
             LogIn
           </Link>
         </p>
-        <button className="btn" onClick={handleGoogle}>
+        <button
+          className="btn form-control"
+          style={{ backgroundColor: "rgb(35, 131, 226)", color: "white" }}
+          onClick={handleGoogle}
+        >
           Sign In With Google
         </button>
       </div>
