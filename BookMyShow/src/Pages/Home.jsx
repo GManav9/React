@@ -1,13 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../Components/Navbar";
-
 import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
-
-// import required modules
 import { Autoplay, Pagination } from "swiper/modules";
 import { useNavigate } from "react-router-dom";
 
@@ -19,7 +14,6 @@ function Home() {
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    // Fetch movies from localStorage
     let storedMovies = JSON.parse(localStorage.getItem("Student")) || [];
     setMovies(storedMovies);
   }, []);
@@ -27,7 +21,7 @@ function Home() {
   const handleDelete = (id) => {
     const updatedMovies = movies.filter((movie) => movie.id !== id);
     setMovies(updatedMovies);
-    localStorage.setItem("Student", JSON.stringify(updatedMovies)); // Update localStorage
+    localStorage.setItem("Student", JSON.stringify(updatedMovies));
   };
 
   const handleEdit = (Id) => {
@@ -55,46 +49,58 @@ function Home() {
       : b.moviename.localeCompare(a.moviename)
   );
 
+  // <Navbar setSearchTerm={setSearchTerm} />;
+
   return (
     <>
-      <div>
-        <Navbar setSearchTerm={setSearchTerm}></Navbar>
-        <Swiper
-          slidesPerView={1}
-          spaceBetween={30}
-          centeredSlides={true}
-          autoplay={{
-            delay: 3000,
-            disableOnInteraction: false,
-          }}
-          pagination={{ clickable: true }}
-          modules={[Pagination, Autoplay]}
-          className="mySwiper"
-        >
-          <SwiperSlide className="">
-            <div className="d-flex justify-content-center  w-100">
-              <img src={"1726036566435_playcardnewweb.jpg"} alt="" />
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className="d-flex justify-content-center  w-100">
-              <img
-                src={"1738746077329_endvsindodi3desktopcarousel.jpg"}
-                alt=""
-              />
-            </div>
-          </SwiperSlide>
-        </Swiper>
+      <div className="container-fluid px-0">
+        <Navbar setSearchTerm={setSearchTerm} />
+
+        {/* Banner Swiper */}
+        <div className="container">
+          <Swiper
+            slidesPerView={1}
+            spaceBetween={30}
+            centeredSlides={true}
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: false,
+            }}
+            pagination={{ clickable: true }}
+            modules={[Pagination, Autoplay]}
+            className="mySwiper"
+          >
+            <SwiperSlide>
+              <div className="d-flex justify-content-center w-100">
+                <img
+                  src={"1726036566435_playcardnewweb.jpg"}
+                  alt=""
+                  className="img-fluid w-100"
+                  style={{ objectFit: "cover", maxHeight: "400px" }}
+                />
+              </div>
+            </SwiperSlide>
+            <SwiperSlide>
+              <div className="d-flex justify-content-center w-100">
+                <img
+                  src={"1738746077329_endvsindodi3desktopcarousel.jpg"}
+                  alt=""
+                  className="img-fluid w-100"
+                  style={{ objectFit: "cover", maxHeight: "400px" }}
+                />
+              </div>
+            </SwiperSlide>
+          </Swiper>
+        </div>
       </div>
 
       <div className="container mt-4">
         <h2 className="text-center">Movie List</h2>
 
-        <div className="Features mb-4 d-flex justify-content-around align-items-center">
-          <div className="container1 w-25">
-            {/* <label className="form-label">Select Category:</label> */}
+        <div className="Features mb-4 row justify-content-around align-items-center">
+          <div className="col-12 col-md-5 mb-2 mb-md-0">
             <select
-              class="form-select"
+              className="form-select"
               id="categorySelect"
               onChange={(e) => setCat(e.target.value)}
             >
@@ -109,7 +115,7 @@ function Home() {
             </select>
           </div>
 
-          <div className="d-flex justify-content-around align-items-center w-25">
+          <div className="col-12 col-md-5 d-flex flex-wrap gap-2 justify-content-center">
             <button
               className="btn btn-success"
               onClick={() => {
@@ -131,70 +137,55 @@ function Home() {
 
         {SortedMovies.length > 0 ? (
           <Swiper
-            slidesPerView={5}
             spaceBetween={5}
+            loop={true}
             autoplay={{
               delay: 3000,
               disableOnInteraction: false,
             }}
-            loop="true"
             pagination={{ clickable: true }}
             modules={[Pagination, Autoplay]}
+            breakpoints={{
+              320: { slidesPerView: 2 },
+              576: { slidesPerView: 2 },
+              768: { slidesPerView: 3 },
+              992: { slidesPerView: 4 },
+              1200: { slidesPerView: 5 },
+            }}
           >
             {SortedMovies.map((movie) => (
               <SwiperSlide key={movie.id}>
-                <div className="card col-xl-11">
-                  <img src={movie.image} className="card-img-top" />
-                  <div className="card-body">
+                <div className="card col-xl-11 col-5 h-100 w-100">
+                  <img
+                    src={movie.image}
+                    className="card-img-top img-fluid"
+                    style={{ height: "400px", objectFit: "cover" }}
+                    alt={movie.moviename}
+                  />
+                  <div className="card-body d-flex flex-column justify-content-between">
                     <h5
                       className="text-bold text-dark"
                       style={{ height: "50px" }}
                     >
                       {movie.moviename}
                     </h5>
-                    <p className="" style={{ height: "50px" }}>
-                      {movie.type}
-                    </p>
-                    <button
-                      onClick={() => handleDelete(movie.id)}
-                      className="btn btn-danger"
-                    >
-                      Delete
-                    </button>
-                    <button
-                      onClick={() => handleEdit(movie.id)}
-                      className="btn btn-danger ms-2"
-                    >
-                      Edit
-                    </button>
+                    <p style={{ height: "50px" }}>{movie.type}</p>
+                    <div className="mt-auto">
+                      <button
+                        onClick={() => handleDelete(movie.id)}
+                        className="btn btn-danger btn-sm me-2"
+                      >
+                        Delete
+                      </button>
+                      <button
+                        onClick={() => handleEdit(movie.id)}
+                        className="btn btn-danger btn-sm"
+                      >
+                        Edit
+                      </button>
+                    </div>
                   </div>
                 </div>
-
-                {/* <div className="movie-card text-center p-2 border rounded shadow">
-                  <img
-                    src={movie.image}
-                    alt={movie.moviename}
-                    style={{
-                      width: "100%",
-                      height: "200px",
-                      objectFit: "cover",
-                    }}
-                  />
-                  <h4 className="mt-2">{movie.moviename}</h4>
-                  <p>{movie.description}</p>
-                  <button
-                    onClick={() => handleDelete(movie.id)}
-                    className="btn btn-danger mt-2"
-                  >
-                    Delete
-                  </button>
-                  <button
-                    onClick={() => handleEdit()}
-                    className="btn btn-danger mt-2"
-                  >
-                    Edit
-                  </button>
-                </div> */}
               </SwiperSlide>
             ))}
           </Swiper>

@@ -1,18 +1,24 @@
-.navbar {
-  width: 65%;
+/* Default for mobile: width 100% */
+.navbar-container {
+  width: 100%;
+  margin: 0 auto;
 }
-.logo {
-  width: 9%;
-  /* border: 1px solid black; */
+
+@media (min-width: 768px) {
+  .navbar-container {
+    width: 90%; /* 75% width on laptops and above */
+  }
 }
-.search {
-  width: 44%;
+
+/* For larger screens: width 75% on laptop/desktops */
+@media (min-width: 992px) {
+  .navbar-container {
+    width: 90%; /* 75% width on laptops and above */
+  }
 }
-.search input {
-  border-left: 0px;
+
+@media (min-width: 1080px) {
+  .navbar-container {
+    width: 70%; /* 75% width on laptops and above */
+  }
 }
-#basic-addon1 {
-  background-color: transparent;
-  border-right: 0px;
-}
-/* $carousel-transition-duration:       .6s; */
