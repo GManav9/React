@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
+import LOGO from "../assets/BMS_logo_new.png";
 
 function Navbar({ setSearchTerm }) {
   const [term, setTerm] = useState("");
@@ -21,7 +22,7 @@ function Navbar({ setSearchTerm }) {
         <div className="w-100">
           <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-sm px-3 py-2">
             <Link className="navbar-brand" to="/">
-              <img src="BMS_logo_new.png" alt="Logo" height="40" />
+              <img src={LOGO} alt="Logo" height="40" />
             </Link>
 
             <button
