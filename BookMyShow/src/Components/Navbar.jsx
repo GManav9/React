@@ -55,7 +55,6 @@ function Navbar({ setSearchTerm }) {
                   />
                 </div>
               </form>
-
               <div className="d-flex flex-column flex-lg-row align-items-lg-center mt-3 mt-lg-0 ms-lg-auto">
                 <Link
                   to="/Form"

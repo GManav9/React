@@ -1,0 +1,33 @@
+.custom-navbar {
+  background-color: #ffffff; /* Light background */
+  border-bottom: 2px solid #eaeaea;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: #1f3c88; /* Deep blue for branding */
+}
+
+.brand-elite {
+  color: #4b6cb7; /* Muted blue for the 'Elite' text */
+}
+
+.nav-link {
+  color: #333333 !important; /* Dark text for visibility */
+  margin: 0 1rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #1f3c88 !important; /* Brand color on hover */
+}
+
+.navbar-toggler {
+  border-color: #cccccc;
+}
+
+nav img {
+  width: 180px;
+}
